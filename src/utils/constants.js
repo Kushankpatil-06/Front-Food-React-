@@ -1,38 +1,6 @@
-import React from "react"
-import ReactDOM from "react-dom/client"
-
-//COMPONENTS
-//HEADER
-  //-LOGO
-  //-NAVBAR
-//BODY
-//SEARCH BAR
-//RESTR CONTAINER
-  //RESTR CARD
-
-//FOOTER
-//copyright
-//addresss
-//support 
-// links
-const Header = ()=>{
-    return(
-        <div className="header">
-         <img className="logo"src="https://cdn.dribbble.com/users/630677/screenshots/3833541/media/201454f743f48c415a38c49419275692.jpg?resize=400x0" alt="" />
-         <div className="navitems">
-            <ul>
-            <li>Home</li>
-            <li>About us</li>
-            <li>Contact us</li>
-            <li>Cart</li>
-            </ul>
-
-         </div>
-        </div>
-    )
-}
-
-const resList= [
+export const LOGO_URL = "https://cdn.dribbble.com/users/630677/screenshots/3833541/media/201454f743f48c415a38c49419275692.jpg?resize=400x0"
+export const CDN_URL= "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/" alt="" />
+export const resList= [
                   {
                     "info": {
                       "id": "14548",
@@ -1963,61 +1931,3 @@ const resList= [
                     }
                   }
                 ]
-                            
-
-const RestroCard = (props)=>{
-    const{resData}=props;
-    const{name,locality,avgRating,cuisines,costForTwo,deliveryTime} = resData?.info; //optional chaining
-    return(
-        <div className="restrocard">
-         <img className="res-logo"src={"https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/"+resData.info.cloudinaryImageId} alt="" />
-          <h3>{name}</h3>
-        <h4>{cuisines.join(",")}</h4>
-          <h4>{locality}</h4>
-         <h4>{avgRating}</h4>
-         <h4>{costForTwo}</h4>
-         <h4>{deliveryTime}</h4>
-        
-
-          
-        </div>
-    );
-};
-
-const Body = () =>{
-    return(
-    <div className="body">
-        <div className="search"> Search </div>
-        <div className="rest-container">
-        {resList.map((restaurants)=>(<RestroCard key={restaurants.info.id} resData = {restaurants}/>))}
-
-        {/* <RestroCard /> */}
-
-        
-        </div>
-    </div>
-    )
-}
-
-
-
-
-const AppLayout = ()=>{
-    return (
-        <div className="app">
-<Header/>
-<Body/>
-
-        </div>
-    )
-}
-
-
-
-
-
-
-
-
-const root = ReactDOM.createRoot(document.getElementById("root"))
-root.render(<AppLayout/>);
