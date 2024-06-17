@@ -2,29 +2,14 @@ import { useEffect, useState } from "react";
 import Shimmer from "/src/components/Shimmer";
 import {useParams} from "react-router-dom";
 import {MENU_API} from "/src/utils/constants"
+import useRestaurantM from "/src/utils/useRestaurantM"
 
 const RestaurantM = () => {
-  const [resInfo, setResInfo] = useState(null);
+
 
   const{resId}=useParams()
 
-  useEffect(() => {
-    fetchMenu();
-  }, []);
-
-  const fetchMenu = async () => {
-    try {
-      const data = await fetch(MENU_API+resId);
-      const json = await data.json();
-    //   console.log(json.data.cards[2].card?.card?.info?.name);
-    //   console.log(json.data.cards[2].card?.card?.info?.cuisines);
-    //   console.log(json.data.cards[2].card?.card?.info?.costForTwoMessage);
-    //   console.log(json.data.cards[5].groupedCard?.cardGroupMap?.REGULAR?.cards[2]?.card?.card?.itemCards);
-      setResInfo(json.data);
-    } catch (error) {
-      console.error('Error fetching the menu:', error);
-    }
-  };
+  const resInfo = useRestaurantM(resId);
 
   if (resInfo == null) {
     return <Shimmer />;
@@ -50,9 +35,7 @@ const RestaurantM = () => {
     <div>
       <h1>{resInfo.cards[2]?.card?.card?.info?.name}</h1>
       <h2>{resInfo.cards[2]?.card?.card?.info?.cuisines.join(', ')}</h2>
-      <h3>{resInfo.cards[2]?.card?.card?.info?.
-defaultPrice
-/100||resInfo.cards[2]?.card?.card?.info?.costForTwo/100}</h3>
+      <h3>{resInfo.cards[2]?.card?.card?.info?.defaultPrice/100||resInfo.cards[2]?.card?.card?.info?.costForTwo/100}</h3>
       <div>
         {renderItemCards()}
       </div>

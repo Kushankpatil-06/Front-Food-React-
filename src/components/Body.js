@@ -2,6 +2,7 @@ import RestroCard from "/src/components/RestroCard";
 import { useState, useEffect } from "react";
 import Shimmer from "./Shimmer";
 import {Link} from "react-router-dom"
+import useOnlineStatus from "/src/utils/useOnlineStatus"
 
 const Body = () => {
   const [list, setList] = useState([]);
@@ -36,6 +37,14 @@ const Body = () => {
       setLoading(false); // Set loading to false in case of error
     }
   };
+
+const OnlineStatus=useOnlineStatus();
+if(OnlineStatus===false)
+return(
+  <h1>Oops It seems Like you are Offline !!!!</h1>
+  // <h1>Please Check your Internet Connection</h1>
+)
+
 
   if (loading) {
     return <Shimmer />; // Show Shimmer while loading
